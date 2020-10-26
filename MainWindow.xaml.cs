@@ -250,12 +250,7 @@ namespace _1.WPF.Intefaz
 
             }
         }
-        //-------------------------------------------------------------- B_Clean (C) ------------------------------------//
 
-        private void Button_Click_Point(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 
         //-------------------------------------------------------------- B_Clean (C) ------------------------------------//
@@ -301,52 +296,37 @@ namespace _1.WPF.Intefaz
 
         //---------------------------------------------------------------- B_Negative (+/-) ------------------------------------//
 
-        //private void Button_Click_Negative(object sender, RoutedEventArgs e)
-        //{
-
-        //    //When not number / turn the number in a negative value
-        //    if (txtBox.Text == "")
-        //    {
-
-        //        txtBox.Text = "-";
-
-
-        //    }
-        //    //When a number value is already inserted
+        private void Button_Click_Negative(object sender, RoutedEventArgs e)
+        {
 
 
 
-        //    if (txtBox.Text != "-" && symbol == "")
-        //    {
-        //        //Last number of list num_1 is multiplied for (-1) converting the value in a negative number
-        //        num_1[num_1.Count - 1] = num_1[num_1.Count - 1] * (-1);
-        //        txtBox.Text = num_1[num_1.Count - 1].ToString();
+            //When txtBox is empty / turn the number into  negative 
+            if (txtBox.Text == "")
+            {
+                txtBox.Text = "-";
 
-        //    }
-        //    if (txtBox.Text != "" && symbol != "")
-        //    {
+            }
 
+            //When txtBox is not empty // and not "-" symbol // and ResulF == 0 (default )
+            if (txtBox.Text != "" && txtBox.Text != "-" && ResultF == 0)
+            {
 
+                number_1 = (number_1 * -1);
+                txtBox.Text = number_1.ToString();
 
-        //        //Last number of list num_2 is multiplied for (-1) converting the value in a negative number
-        //        num_2[num_2.Count - 1] = num_2[num_2.Count - 1] * (-1);
-        //        txtBox.Text = num_2[num_2.Count - 1].ToString();
+            }
+            if (txtBox.Text != "" && ResultF != 0)
+            {
 
-        //    }
-
-        //    if (ResultF != 0)
-        //    {
-
-        //        txtBox.Text = (ResultF * -1).ToString();
-        //        ResultF = double.Parse(txtBox.Text);
-        //        Console.WriteLine("Reultado conseguido");
-        //        Console.WriteLine(ResultF);
-        //    }
-
-        //}
+                ResultF = (ResultF * -1);
+                txtBox.Text = ResultF.ToString();
+            }
 
 
 
+
+        }
 
 
         //----------------------------------------------------- Add (+)--------------------------------//
@@ -355,9 +335,10 @@ namespace _1.WPF.Intefaz
             //Adding the symbol and adding the number to the list
             if (symbol == "")
             {
+                //Setting the symbol
                 symbol = "+";
-                // counter = 1;
 
+                //Stoting the number into the List num_1
                 num_1.Add(number_1);
 
             }
@@ -370,8 +351,6 @@ namespace _1.WPF.Intefaz
 
             }
 
-            //num_1.Add(double.Parse(txtBox.Text));
-            //symbol = "+";
             txtBox.Clear();
         }
         //------------------------------------------------ ---Subtract (-) --------------------------------//
@@ -380,9 +359,10 @@ namespace _1.WPF.Intefaz
         {
             if (symbol == "")
             {
+                //Setting the symbol
                 symbol = "-";
-                // counter = 1;
 
+                //Stoting the number into the List num_1
                 num_1.Add(number_1);
 
             }
@@ -393,18 +373,7 @@ namespace _1.WPF.Intefaz
                 num_1.Add(number_2);
 
             }
-            //else
-            //{
-            //    symbol = "-";
 
-
-            //    //used to make correct calculation when you add and then press subtract 
-            //    if (contador > 1)
-            //    {
-            //        num_2.Clear();
-            //    }
-
-            //}
             txtBox.Clear();
 
         }
@@ -413,23 +382,16 @@ namespace _1.WPF.Intefaz
         private void Button_Click_Multiple(object sender, RoutedEventArgs e)
         {
 
-            if (symbol == "*")
+            if (symbol == "")
             {
-                //it shows the last number inserted into the List num_2
-                txtBox.Text = num_2[num_2.Count - 1].ToString();
-
-            }
-            else
-            {
-
+                //Setting the symbol
                 symbol = "*";
 
+                //Stoting the number into the List num_1
+                num_1.Add(number_1);
 
-                if (contador > 1)
-                {
-                    num_2.Clear();
-                }
             }
+
             txtBox.Clear();
 
         }
@@ -438,25 +400,18 @@ namespace _1.WPF.Intefaz
         private void Button_Click_Divide(object sender, RoutedEventArgs e)
         {
 
-            if (symbol == "/")
+            if (symbol == "")
             {
 
-                //it shows the last number inserted into the List num_2
-                txtBox.Text = num_2[num_2.Count - 1].ToString();
-
-            }
-            else
-            {
-
-
+                //Setting the symbol
                 symbol = "/";
 
+                //Stoting the number into the List num_1
+                num_1.Add(number_1);
 
-                if (contador > 1)
-                {
-                    num_2.Clear();
-                }
             }
+
+
             txtBox.Clear();
 
         }
@@ -553,7 +508,6 @@ namespace _1.WPF.Intefaz
                         {
 
 
-                            //First Sum 
                             //Add the two numbers / store into Result / Display the Result
                             ResultF = (num_1.Sum() - number_2);
                             txtBox.Text = ResultF.ToString();
@@ -571,21 +525,21 @@ namespace _1.WPF.Intefaz
                         {
 
 
-                            txtBox.Text = (ResultF * num_2.Sum()).ToString();
-
-                            //Storing the next result 
+                            // Multiple the Result //Result and the number 2
+                            txtBox.Text = (ResultF * number_2).ToString();
+                            //store the result
                             ResultF = double.Parse(txtBox.Text);
-
                             symbol = "";
                         }
                         else
                         {
 
-
-                            ResultF = (num_1.Sum() * num_2.Sum());
+                            //Multiple the two numbers / store into Result / Display the Result
+                            ResultF = (num_1[0] * number_2);
                             txtBox.Text = ResultF.ToString();
+                            //Clear Symbol in case a different symbol is pressed /not break the App
                             symbol = "";
-                            num_2.Clear();
+                            num_1.Clear();
 
 
                         }
@@ -597,21 +551,22 @@ namespace _1.WPF.Intefaz
                         {
 
 
-                            txtBox.Text = (ResultF / num_2.Sum()).ToString();
-
-                            //Storing the next result 
+                            // Divide the Result //Result and the number 2
+                            txtBox.Text = (ResultF / number_2).ToString();
+                            //store the result
                             ResultF = double.Parse(txtBox.Text);
-
                             symbol = "";
                         }
                         else
                         {
 
 
-                            ResultF = (num_1.Sum() / num_2.Sum());
+                            //Divide the two numbers / store into Result / Display the Result
+                            ResultF = (num_1[0] / number_2);
                             txtBox.Text = ResultF.ToString();
+                            //Clear Symbol in case a different symbol is pressed /not break the App
                             symbol = "";
-                            num_2.Clear();
+                            num_1.Clear();
 
 
                         }
@@ -669,10 +624,14 @@ namespace _1.WPF.Intefaz
         //used to store the symbol entered
         string symbol = "";
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
 
-
-
+        }
     }
 }
