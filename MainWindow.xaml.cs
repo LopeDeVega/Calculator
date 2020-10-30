@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace _1.WPF.Intefaz
             {
                 txtBox.Text = txtBox.Text + 0;
                 number_1 = (double.Parse(txtBox.Text));
+               
 
             }
 
@@ -49,6 +51,10 @@ namespace _1.WPF.Intefaz
 
                 txtBox.Text = txtBox.Text + 0;
                 number_2 = (double.Parse(txtBox.Text));
+
+
+               
+               
 
 
 
@@ -64,7 +70,7 @@ namespace _1.WPF.Intefaz
                 txtBox.Text = txtBox.Text + 1;
                 number_1 = (double.Parse(txtBox.Text));
 
-
+             
             }
 
             //else clear the textbox and add the number to List num_2
@@ -73,6 +79,8 @@ namespace _1.WPF.Intefaz
             {
                 txtBox.Text = txtBox.Text + 1;
                 number_2 = (double.Parse(txtBox.Text));
+
+
 
             }
 
@@ -100,7 +108,8 @@ namespace _1.WPF.Intefaz
 
                 txtBox.Text = txtBox.Text + 2;
                 number_2 = (double.Parse(txtBox.Text));
-
+               
+                
             }
 
         }
@@ -115,13 +124,16 @@ namespace _1.WPF.Intefaz
                 txtBox.Text = txtBox.Text + 3;
                 number_1 = (double.Parse(txtBox.Text));
 
+               // num_2.Add(number_1);
             }
             else
             {
 
                 txtBox.Text = txtBox.Text + 3;
                 number_2 = (double.Parse(txtBox.Text));
+                
 
+              
             }
         }
 
@@ -135,11 +147,14 @@ namespace _1.WPF.Intefaz
 
                 txtBox.Text = txtBox.Text + 4;
                 number_1 = (double.Parse(txtBox.Text));
+               // num_2.Add(number_1);
+
             }
             else
             {
                 txtBox.Text = txtBox.Text + 4;
                 number_2 = (double.Parse(txtBox.Text));
+                
 
             }
 
@@ -260,19 +275,23 @@ namespace _1.WPF.Intefaz
 
             //Clean textbox
             txtBox.Clear();
+            txtBox_2.Clear();
+           
 
             //Set the variables to cero
             number_1 = 0;
             number_2 = 0;
+            ResultF = 0;
+            contador = 0;
+
             //Delete all the numbers stored into the Lists
             num_1.Clear();
             num_2.Clear();
 
 
             //Set the values at Cero (0)
-            ResultF = 0;
             symbol = "";
-            contador = 0;
+            DisplayOperation = "";
 
         }
         //------------------------------------------------------------- B_Clean (CE) ------------------------------------//
@@ -341,13 +360,38 @@ namespace _1.WPF.Intefaz
                 //Stoting the number into the List num_1
                 num_1.Add(number_1);
 
+                txtBox_2.Text = number_1 + "" + symbol;
+
+
+                DisplayOperation = number_1.ToString();
+
+
             }
 
             //Adding more than two numbers without press igual 
             else
             {
 
+
+
+                
+
                 num_1.Add(number_2);
+
+                //MessageBox.Show(num_1.Last().ToString());
+
+
+
+                txtBox_2.Text = DisplayOperation + symbol + num_1.Last();
+
+               // MessageBox.Show(num_1.Last().ToString());
+
+                    DisplayOperation = txtBox_2.Text;
+                    
+              
+
+
+              
 
             }
 
@@ -479,9 +523,14 @@ namespace _1.WPF.Intefaz
                         else
                         {
 
+                            
+                            //It will display the operaion on textBox_2 
+                            txtBox_2.Text = (DisplayOperation + "" + symbol + "" + number_2 + "" + "=").ToString();
+
                             //First Sum 
                             //Add the two numbers / store into Result / Display the Result
                             ResultF = (num_1.Sum() + number_2);
+
                             txtBox.Text = ResultF.ToString();
                             //Clear Symbol in case a different symbol is pressed /not break the App
                             symbol = "";
@@ -621,17 +670,12 @@ namespace _1.WPF.Intefaz
         int contador = 0;
         int counter = 0;
 
+        string DisplayOperation;
+
+
         //used to store the symbol entered
         string symbol = "";
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
     }
 }
